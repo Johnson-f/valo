@@ -1,0 +1,23 @@
+[package]
+name = "valo-core"
+version = "0.0.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Core logic for valo, a self-hosted embedded auth library"
+
+[dependencies]
+sqlx = { version = "0.8.6", features = ["runtime-tokio", "postgres", "uuid", "time", "macros"] }
+redis = { version = "0.27", features = ["tokio-comp", "connection-manager"] }
+jsonwebtoken = { version = "10.3", default-features = false, features = ["rust_crypto"] }
+argon2 = "0.5.3"
+sha2 = "0.10"
+rand = "0.8"
+base64 = "0.22"
+uuid = { version = "1", features = ["v4", "serde"] }
+time = { version = "0.3", features = ["serde"] }
+thiserror = "1"
+async-trait = "0.1"
+serde = { version = "1", features = ["derive"] }
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
