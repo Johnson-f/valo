@@ -1,0 +1,32 @@
+[package]
+name = "valo-axum-examples"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[features]
+# Each enables the matching built-in mailer in valo-core, exercised by the
+# `mailer_providers` example (and the Resend snippet in src/main.rs).
+resend = ["valo-core/resend"]
+sendgrid = ["valo-core/sendgrid"]
+ses = ["valo-core/ses"]
+smtp = ["valo-core/smtp"]
+
+[dependencies]
+valo-core = { path = "../../crates/valo-core" }
+valo-axum = { path = "../../crates/valo-axum" }
+axum = "0.8"
+tokio = { version = "1", features = ["full"] }
+async-trait = "0.1"
+serde_json = "1"
+uuid = { version = "1", features = ["v4"] }
+# rustls only — never pull OpenSSL. cookie_store powers the cookie_mode example.
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "cookies"] }
+# default-features = false drops the `otpauth` feature so TOTP::new is the
+# 5-arg form (algorithm, digits, skew, step, secret) used by the mfa example.
+totp-rs = { version = "5.7", default-features = false }
+# Mints a throwaway Ed25519 keypair (PKCS#8/SPKI PEM) for the eddsa example.
+# `pem` pulls in `alloc` (needed for EncodePrivateKey/EncodePublicKey) and
+# enables to_pkcs8_pem / to_public_key_pem on the key types.
+ed25519-dalek = { version = "2", features = ["pkcs8", "pem", "rand_core"] }
+rand = "0.8"
