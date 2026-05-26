@@ -1,0 +1,22 @@
+[package]
+name = "valo-axum"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "Axum HTTP adapter for the valo auth library"
+
+[dependencies]
+valo-core = { path = "../valo-core" }
+axum = "0.8"
+axum-extra = { version = "0.10", features = ["cookie"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+uuid = { version = "1", features = ["v4"] }
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+tower = { version = "0.5", features = ["util"] }
+http-body-util = "0.1"
+async-trait = "0.1"
+serde_json = "1"
+uuid = { version = "1", features = ["v4"] }
