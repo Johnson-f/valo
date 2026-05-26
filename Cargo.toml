@@ -1,3 +1,3 @@
 [workspace]
 resolver = "2"
-members = ["crates/valo-core"]
+members = ["crates/valo-core", "crates/valo-axum", "examples/valo-axum-examples"]
