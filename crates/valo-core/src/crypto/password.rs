@@ -1,3 +1,12 @@
+//! Argon2id password hashing.
+//!
+//! Uses `Argon2::default()`, which is Argon2id v19 with parameters
+//! m=19456 KiB (19 MiB), t=2, p=1 — the OWASP-recommended *minimum* for
+//! Argon2id. Making these parameters configurable (so operators can raise
+//! the cost on capable hardware) is a deliberate follow-on; do not hand-tune
+//! here. Because hashes are stored as PHC strings, parameters can be raised
+//! later and old hashes still verify.
+
 use argon2::password_hash::{rand_core::OsRng, PasswordHash, PasswordHasher, PasswordVerifier, SaltString};
 use argon2::Argon2;
 use std::sync::OnceLock;
@@ -54,5 +63,10 @@ mod tests {
         assert_eq!(dummy_hash(), dummy_hash());
         assert!(dummy_hash().starts_with("$argon2id$"));
         assert!(!verify_password("anything", dummy_hash()));
+    }
+
+    #[test]
+    fn verify_rejects_malformed_hash() {
+        assert!(!verify_password("anything", "not-a-valid-phc-string"));
     }
 }

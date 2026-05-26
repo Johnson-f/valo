@@ -12,6 +12,20 @@ pub enum Error {
     InvalidToken,
     #[error("account is not active")]
     AccountInactive,
+    #[error("too many attempts, try again later")]
+    RateLimited,
+    #[error("MFA is not configured on the server")]
+    MfaNotConfigured,
+    #[error("invalid MFA code")]
+    InvalidMfaCode,
+    #[error("encryption error")]
+    Encryption,
+    #[error("unknown oauth provider")]
+    ProviderNotFound,
+    #[error("invalid or expired oauth state")]
+    OAuthState,
+    #[error("oauth provider error: {0}")]
+    OAuth(String),
     #[error("weak signing secret: HS256 requires at least 32 bytes")]
     WeakSecret,
     #[error("password hashing failed")]
