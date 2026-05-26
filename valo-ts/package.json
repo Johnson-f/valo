@@ -1,0 +1,11 @@
+{
+  "name": "valo-ts",
+  "module": "lib.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
